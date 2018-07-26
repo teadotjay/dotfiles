@@ -3,8 +3,6 @@
 " Use Vim settings, rather then Vi settings. This setting must be as early as
 " possible, as it has side effects.
 set nocompatible
-" use vim settings
-set nocompatible
 
 " tab and autoindent control
 set autoindent
@@ -25,7 +23,7 @@ set number
 set nowrap
 
 " fix my headache
-set belloff=all
+"set belloff=all
 
 " mouse control
 set mouse=a
@@ -36,7 +34,8 @@ set ttyfast
 set gdefault
 set ignorecase
 set smartcase
-set hlsearch!
+set nohlsearch
+set incsearch
 
 " scrolling
 noremap H ^
@@ -44,22 +43,22 @@ noremap L $
 noremap J 10j
 noremap K 10k
 set scrolloff=5
-set sidescrolloff=10
+set sidescrolloff=5
 set sidescroll=1
 
 " diff settings
 set diffopt+=vertical
 
-" vv selects entire line
-noremap vv 0v$
-
 " Display extra whitespace
-set list listchars=tab:»·,trail:·,nbsp:·
+set list listchars=tab:»·,nbsp:·
 
-"Map Ctrl + S to save in any mode
+" Map Ctrl + S to save in any mode
+" uncomment to select between returning to normal mode or not
 noremap <silent> <C-S>          :update<CR>
-vnoremap <silent> <C-S>         <C-C>:update<CR>
-inoremap <silent> <C-S>         <C-O>:update<CR>
+" vnoremap <silent> <C-S>         <C-C>:update<CR>
+vnoremap <silent> <C-S> <ESC>:update<CR>
+" inoremap <silent> <C-S>         <C-O>:update<CR>
+inoremap <silent> <C-S> <ESC>:update<CR>
 
 " Make it obvious where 100 characters is
 set textwidth=100
@@ -67,3 +66,48 @@ set textwidth=100
 set formatoptions=qrn1
 set wrapmargin=0
 set colorcolumn=+1
+
+" use tab to indent lines and blocks
+noremap <TAB> >
+noremap <S-TAB> <
+
+" set gui options
+set guioptions+=b
+set guioptions-=T
+
+" tabs and buffers
+set hidden
+
+" don't use Ex mode (why even have that mode??)
+map Q gq
+
+" misc options
+set history=50
+set showcmd
+
+" enable some MS-Windows behaviors but not the obnoxious ones
+set selection=exclusive
+set keymodel=startsel
+vnoremap <C-C> "+y
+vnoremap <C-Insert> "+y
+map <C-V>		"+gP
+map <S-Insert>		"+gP
+cmap <C-V>		<C-R>+
+cmap <S-Insert>		<C-R>+
+imap <S-Insert>		<C-V>
+vmap <S-Insert>		<C-V>
+noremap <C-Z> u
+inoremap <C-Z> <C-O>u
+noremap <C-Y> <C-R>
+inoremap <C-Y> <C-O><C-R>
+exe 'inoremap <script> <C-V> <C-G>u' . paste#paste_cmd['i']
+exe 'vnoremap <script> <C-V> ' . paste#paste_cmd['v']
+
+" CTRL-Tab is Next window
+noremap <C-Tab> <C-W>w
+inoremap <C-Tab> <C-O><C-W>w
+cnoremap <C-Tab> <C-C><C-W>w
+onoremap <C-Tab> <C-C><C-W>w
+
+noremap <C-A> ggVG
+inoremap <C-A> <C-O>gg<C-O>gH<C-O>G
