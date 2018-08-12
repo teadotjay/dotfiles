@@ -1,0 +1,39 @@
+## Useful aliases
+alias vi=vi
+alias cdup="cd .."
+alias dir="ls -l"
+alias lsl="ls -l|grep ^l"
+alias lsd="ls -l|grep ^d"
+
+# enable color support of ls and also add handy aliases
+if [ -x /usr/bin/dircolors ]; then
+    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+    alias ls='ls --color=auto'
+    alias grep='grep --color=auto'
+    alias fgrep='fgrep --color=auto'
+    alias egrep='egrep --color=auto'
+fi
+
+# some more ls aliases
+alias ll='ls -alF'
+alias la='ls -A'
+alias l='ls -CF'
+
+# Add an "alert" alias for long running commands.  Use like so:
+#   sleep 10; alert
+alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
+
+## vi - start gvim in single-window mode
+function vi() {
+    if test -z "$GVIM"; then
+        export GVIM=GVIM
+    fi
+    gvim --servername $GVIM --remote-tab-silent -geometry 90x60 -reverse $*
+}
+
+## vis - open file in new (or existing) numbered gvim window
+function vis() {
+    export GVIM=GVIM$1
+    shift
+    gvim --servername $GVIM --remote-tab-silent -geometry 90x60 $*
+}

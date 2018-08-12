@@ -29,9 +29,11 @@ set nowrap
 set mouse=a
 set ttymouse=sgr
 set ttyfast
+nnoremap <X1Mouse> <C-O>
+nnoremap <X2Mouse> <C-I>
 
 " search/regex control
-set gdefault
+"set gdefault
 set ignorecase
 set smartcase
 set nohlsearch
@@ -60,16 +62,14 @@ vnoremap <silent> <C-S> <ESC>:update<CR>
 " inoremap <silent> <C-S>         <C-O>:update<CR>
 inoremap <silent> <C-S> <ESC>:update<CR>
 
-" Make it obvious where 100 characters is
-set textwidth=100
+" Make it obvious where 80 characters is
+set textwidth=80
 " set formatoptions=cq
 set formatoptions=qrn1
 set wrapmargin=0
 set colorcolumn=+1
+hi ColorColumn ctermbg=0 guibg=#202020
 
-" use tab to indent lines and blocks
-noremap <TAB> >
-noremap <S-TAB> <
 
 " set gui options
 set guioptions+=b
@@ -98,8 +98,11 @@ imap <S-Insert>		<C-V>
 vmap <S-Insert>		<C-V>
 noremap <C-Z> u
 inoremap <C-Z> <C-O>u
-noremap <C-Y> <C-R>
-inoremap <C-Y> <C-O><C-R>
+"noremap <C-Y> <C-R>
+"inoremap <C-Y> <C-O><C-R>
+vnoremap <C-X> "+x
+vnoremap <S-Del> "+x
+
 exe 'inoremap <script> <C-V> <C-G>u' . paste#paste_cmd['i']
 exe 'vnoremap <script> <C-V> ' . paste#paste_cmd['v']
 
@@ -109,5 +112,23 @@ inoremap <C-Tab> <C-O><C-W>w
 cnoremap <C-Tab> <C-C><C-W>w
 onoremap <C-Tab> <C-C><C-W>w
 
+" CTRL-A selects all
 noremap <C-A> ggVG
 inoremap <C-A> <C-O>gg<C-O>gH<C-O>G
+
+" buffer management with \b
+map <leader>bn :bn<cr>
+map <leader>bp :bp<cr>
+map <leader>bd :bd<cr>
+"map <leader>bd :bp<bar>sp<bar>bn<bar>bd<CR>
+
+" Pathogen plugin management
+execute pathogen#infect()
+
+" NERDCommenter defaults
+let g:NERDSpaceDelims = 1
+let g:NERDCommentEmptyLines = 1
+
+" ; maps to :
+noremap ; :
+
