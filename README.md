@@ -33,8 +33,6 @@ git clone https://github.com/teadotjay/dotfiles.git ~/dotfiles/teadotjay
 cd ~/dotfiles/teadotjay && git submodule update --init
 ```
 
-If you get a "git" error, try replacing `git` with `/usr/bin/git` above.
-
 From that point, you can cherry-pick my settings or replace your dotfiles with
 links to mine using deploy.sh. (Don't worry, deploy.sh makes a backup.)
 
